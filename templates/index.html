@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 100%;height: 50px;background-color: blue;">
+            <h1>HEADER</h1>
+        </div>
+        {% block content %}
+        <h1>Home Page</h1>
+        {% endblock %}
+        <div style="width: 100%;height: 50px;background-color: blue;">
+            <h1>FOOTER</h1>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
+</body>
+
+</html>
