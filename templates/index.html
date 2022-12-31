@@ -5,22 +5,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <title>Download youtube videos</title>
 </head>
 
 <body>
-    <div>
-        <div style="width: 100%;height: 50px;background-color: blue;">
-            <h1>HEADER</h1>
-        </div>
-        {% block content %}
-        <h1>Home Page</h1>
-        {% endblock %}
-        <div style="width: 100%;height: 50px;background-color: blue;">
-            <h1>FOOTER</h1>
-        </div>
+
+    <!--Header-->
+    <div class="header">
+        <a href="/">
+            <img src="{{ url_for('static', filename='imgs/YouTube_23392.png') }}" />
+            <h1>Download youtube videos</h1>
+        </a>
     </div>
+
+    <!--Search Bar-->
+    <form class="searchBar">
+        <input type="text" name="q" class="searchTerm" placeholder="Search" />
+        <button type="submit" class="searchButton">Submit</button>
+    </form>
+
+    <!--Result-->
+    {% block result %}
+    <div class="result">
+        <ul class="list">
+            {% for video in videos %}
+            <a href="/download/{{video.id.videoId}}" class="item">
+                <img src={{video.snippet.thumbnails.medium.url}} />
+                <div class="detailContainer">
+                    <h3 class="detailName">{{video.snippet.title}}</h3>
+                    <p class="detailView"></p>
+                    <p class="detailLike"></p>
+                    <p class="detailUploadTime">Uploaded {{video.snippet.publishTime}} ago</p>
+                </div>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}
+
     <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
+
 </body>
 
 </html>
