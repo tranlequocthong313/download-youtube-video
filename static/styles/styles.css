@@ -37,6 +37,7 @@ body {
     border-radius: 8px;
     color: black;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .result {
@@ -53,11 +54,20 @@ body {
     position: relative;
 }
 
+.result .item img {
+    cursor: pointer;
+}
+
 .result .item .action {
     position: absolute;
     right: 0;
     bottom: 0;
     margin: 20px;
+}
+
+.result .action button,
+.result .action select {
+    cursor: pointer;
 }
 
 .result .detailContainer {

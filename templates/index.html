@@ -21,7 +21,8 @@
 
     <!--Directed Downloading Bar-->
     <form class="barContainer" action="/search_with_link" method="post">
-        <input type="text" name="link" class="inputTerm" placeholder="Link" />
+        <input type="text" name="link" class="inputTerm"
+            placeholder="Link (https://www.youtube.com/watch?v=223eI1x6PsQ)" />
         <button type="submit" class="submitButton">Search</button>
     </form>
 
@@ -29,14 +30,18 @@
 
     <!--Search Bar-->
     <form class="barContainer" action="/search_with_keyword" method="post">
-        <input type="text" name="keyword" class="inputTerm" placeholder="Keyword" />
+        <input type="text" name="keyword" class="inputTerm"
+            placeholder="Keyword (Ed Sheeran Live FULL SHOW | Magic Radio)" />
         <button type="submit" class="submitButton">Search</button>
     </form>
 
     <!--Destination Bar-->
+    {% if videos|length > 0 %}
     <form class="barContainer">
-        <input type="text" name="destination" class="inputTerm" id="destination" placeholder="Destination" />
+        <input type="text" name="destination" class="inputTerm" id="destination"
+            placeholder="Destination (C:\Users\Downloads)" />
     </form>
+    {% endif %}
 
     <!--Result-->
     {% block result %}
