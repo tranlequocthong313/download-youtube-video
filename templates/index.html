@@ -19,10 +19,18 @@
         </a>
     </div>
 
+    <!--Directed Downloading Bar-->
+    <form class="barContainer" action="/download">
+        <input type="text" name="link" class="inputTerm" placeholder="Link" />
+        <button type="submit" class="submitButton">Download</button>
+    </form>
+
+    <h3 style="width: 100%; text-align: center;">OR</h3>
+
     <!--Search Bar-->
-    <form class="searchBar">
-        <input type="text" name="q" class="searchTerm" placeholder="Search" />
-        <button type="submit" class="searchButton">Submit</button>
+    <form class="barContainer" action="/search">
+        <input type="text" name="keyword" class="inputTerm" placeholder="Keyword" />
+        <button type="submit" class="submitButton">Search</button>
     </form>
 
     <!--Result-->
@@ -36,15 +44,13 @@
                     <h3 class="detailName">{{video.snippet.title}}</h3>
                     <p class="detailView"></p>
                     <p class="detailLike"></p>
-                    <p class="detailUploadTime">Uploaded {{video.snippet.publishTime}} ago</p>
+                    <p class="detailUploadAt">Uploaded {{video.snippet.publishedAt}} ago</p>
                 </div>
             </a>
             {% endfor %}
         </ul>
     </div>
     {% endblock %}
-
-    <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"></script>
 
 </body>
 
