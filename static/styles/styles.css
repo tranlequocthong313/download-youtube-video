@@ -34,9 +34,8 @@ body {
 }
 
 .barContainer .submitButton {
-    background-color: #d32322;
     border-radius: 8px;
-    color: white;
+    color: black;
     margin-left: 10px;
 }
 
@@ -51,6 +50,14 @@ body {
     background-color: rgb(194, 188, 187);
     border-radius: 16px;
     padding: 12px;
+    position: relative;
+}
+
+.result .item .action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
 }
 
 .result .detailContainer {

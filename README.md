@@ -1,8 +1,7 @@
 # Project: A website to download videos on youtube
 - Features:
-    + Searching the videos by name on a searching bar
-    + Downloading directly by a URL or Click on listed list
-    + Choosing the director for storing
+    + Searching the videos by name
+    + Downloading directly by a URL or choosing on searched list
     + Previewing the video 
     + Choosing video's quality
 - Using:
