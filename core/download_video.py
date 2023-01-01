@@ -2,7 +2,7 @@ from pytube import YouTube
 
 
 class Downloader:
-    def download(self, videoId, quality):
+    def download(self, videoId, quality, destination):
         try:
             link = 'https://www.youtube.com/watch?v=' + videoId
             youtubeObject = YouTube(link).streams
@@ -12,7 +12,7 @@ class Downloader:
             else:
                 youtubeObject = youtubeObject.get_lowest_resolution()
 
-            youtubeObject.download()
+            youtubeObject.download(destination)
 
             return "Download is completed successfully"
         except:

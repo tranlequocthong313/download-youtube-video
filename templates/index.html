@@ -20,17 +20,22 @@
     </div>
 
     <!--Directed Downloading Bar-->
-    <form class="barContainer" action="/download">
+    <form class="barContainer" action="/search_with_link" method="post">
         <input type="text" name="link" class="inputTerm" placeholder="Link" />
-        <button type="submit" class="submitButton">Download</button>
+        <button type="submit" class="submitButton">Search</button>
     </form>
 
     <h3 style="width: 100%; text-align: center;">OR</h3>
 
     <!--Search Bar-->
-    <form class="barContainer" action="/search">
+    <form class="barContainer" action="/search_with_keyword" method="post">
         <input type="text" name="keyword" class="inputTerm" placeholder="Keyword" />
         <button type="submit" class="submitButton">Search</button>
+    </form>
+
+    <!--Destination Bar-->
+    <form class="barContainer">
+        <input type="text" name="destination" class="inputTerm" id="destination" placeholder="Destination" />
     </form>
 
     <!--Result-->
