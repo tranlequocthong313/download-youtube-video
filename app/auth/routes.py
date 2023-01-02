@@ -1,38 +1,27 @@
-from flask import session, render_template, request, redirect, flash, url_for, Blueprint
-from models.user import User
-from extensions import db
+from flask import session, render_template, request, redirect, url_for, Blueprint
+from auth.auth_service import AuthService
+from config import username_session_key, email_session_key
 
 blueprint = Blueprint('auth', __name__)
-
-username_key = 'username'
-email_key = 'email'
+auth = AuthService()
 
 
 @blueprint.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        session.permanent = True
-        session[username_key] = request.form[username_key]
-
-        found_user = User.query.filter_by(
-            name=request.form[username_key]).first()
-        if found_user:
-            session[email_key] = found_user.email
-        else:
-            user = User(session[username_key], None)
-            db.session.add(user)
-            db.session.commit()
-
-        return redirect(url_for('main.home'))
+        return auth.login()
     else:
-        if username_key in session:
-            return redirect(url_for('main.home'))
-        return render_template('login.html')
+        return redirect_by_login_status()
+
+
+def redirect_by_login_status():
+    if auth.is_login():
+        return redirect(url_for('main.home'))
+    return render_template('login.html')
 
 
 @blueprint.route('/logout')
 def logout():
-    session.pop(username_key, None)
-    session.pop(email_key, None)
-
+    session.pop(username_session_key, None)
+    session.pop(email_session_key, None)
     return redirect(url_for('auth.login'))

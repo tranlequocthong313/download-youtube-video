@@ -1,6 +1,9 @@
 import os
 from datetime import timedelta
 
+username_session_key = 'username'
+email_session_key = 'email'
+
 
 class Config:
     SECRET_KEY = os.environ.get('SESSION_SECRET_KEY')

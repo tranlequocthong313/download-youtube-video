@@ -1,26 +1,28 @@
 from flask import session, render_template, request, redirect, flash, url_for, Blueprint
-from helper.youtube_api import YoutubeAPI
-from helper.downloader import Downloader
+from main.youtube_api import YoutubeAPI
+from main.downloader import Downloader
+from config import username_session_key
+from auth.auth_service import AuthService
+from main.video import Video
 
 blueprint = Blueprint('main', __name__)
-
-username_key = 'username'
-email_key = 'email'
 ytbAPI = YoutubeAPI()
+auth = AuthService()
+downloader = Downloader()
 
 
 @blueprint.route('/')
+@blueprint.route('/home')
 def home():
     username = None
-    if username_key in session:
-        username = session[username_key]
+    if auth.is_login():
+        username = session[username_session_key]
     return render_template('index.html', username=username)
 
 
 @blueprint.route('/search_with_keyword', methods=['POST'])
 def search_with_keyword():
-    key_word = request.form['keyword']
-    videos = ytbAPI.search_with_keyword(key_word)
+    videos = ytbAPI.search_with_keyword(request.form['keyword'])
     return redirect_by_videos_length(videos)
 
 
@@ -28,7 +30,7 @@ def redirect_by_videos_length(videos):
     if len(videos) == 0:
         flash('Video couldn\'t be found!')
         return redirect(url_for('main.home'))
-    return render_template('index.html', videos=videos, username=session[username_key])
+    return render_template('index.html', videos=videos, username=session[username_session_key])
 
 
 @blueprint.route('/search_with_link', methods=['POST'])
@@ -46,9 +48,8 @@ def search_with_link():
 @blueprint.route('/download')
 def download():
     try:
-        d = Downloader()
-        args = request.args
-        d.download(args.get('id'), args.get('quality'), args.get('dest'))
+        downloader.download(
+            Video(request.args.get('id'), request.args.get('quality'), request.args.get('dest')))
         flash('Video has been downloaded!')
         return redirect(url_for('main.home'))
     except Exception:
