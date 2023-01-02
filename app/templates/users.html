@@ -2,5 +2,12 @@
 <ul>
     {% for user in users %}
     <li>ID: {{user.id}} Name: {{user.name}} Email: {{user.email}}</li>
+    <b>Download videos:</b>
+    <ul>
+        {% for video in user.downloaded_videos %}
+        <li>ID: {{video.id}} VideoID: {{video.videoId}} Quality: {{video.quality}} Destination: {{video.destination}}
+        </li>
+        {% endfor %}
+    </ul>
     {% endfor %}
 </ul>

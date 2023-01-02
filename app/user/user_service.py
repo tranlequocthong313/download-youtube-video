@@ -1,8 +1,8 @@
-
 from flask import session
 from models.user import User
 from extensions import db
 from config import username_session_key, email_session_key
+from models.video import Video
 
 
 class UserService:
@@ -21,5 +21,8 @@ class UserService:
         db.session.commit()
         session[email_session_key] = new_email
 
-    def has_set_email_already(self):
-        return email_session_key in session
+    def add_new_downloaded_video(self, video):
+        user = self.find_user_by_name(session[username_session_key])
+        downloaded_video = Video(video, user.id)
+        db.session.add(downloaded_video)
+        db.session.commit()

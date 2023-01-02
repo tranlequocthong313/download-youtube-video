@@ -4,11 +4,13 @@ from main.downloader import Downloader
 from config import username_session_key
 from auth.auth_service import AuthService
 from main.video import Video
+from user.user_service import UserService
 
 blueprint = Blueprint('main', __name__)
 ytbAPI = YoutubeAPI()
 auth = AuthService()
 downloader = Downloader()
+user = UserService()
 
 
 @blueprint.route('/')
@@ -48,8 +50,11 @@ def search_with_link():
 @blueprint.route('/download')
 def download():
     try:
-        downloader.download(
-            Video(request.args.get('id'), request.args.get('quality'), request.args.get('dest')))
+        video = Video(request.args.get('id'), request.args.get(
+            'quality'), request.args.get('dest'))
+        downloader.download(video)
+        if auth.is_login():
+            user.add_new_downloaded_video(video)
         flash('Video has been downloaded!')
         return redirect(url_for('main.home'))
     except Exception:

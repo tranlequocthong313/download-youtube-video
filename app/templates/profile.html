@@ -8,7 +8,17 @@
 {% endif %}
 {% endwith %}
 <form action="/update-information" method="post">
-    <input type="email" value="{{email if email}}" name="email" placeholder="Email">
+    <input type="email" name="email" placeholder="Email">
     <button type="submit">Update</button>
 </form>
+<h3>ID: {{user.id}} Name: {{user.name}} Email: {{user.email}}</h3>
+<b>Download videos:</b>
+<ul>
+    {% for video in user.downloaded_videos %}
+    <li>ID: {{video.id}} VideoID: <a href="https://www.youtube.com/watch?v={{video.videoId}}"
+            target="_blank">{{video.videoId}}</a>
+        Quality: {{video.quality}} Destination: {{video.destination}}
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %} -->
