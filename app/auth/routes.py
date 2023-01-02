@@ -14,14 +14,14 @@ def login():
         session.permanent = True
         session[username_key] = request.form[username_key]
 
-        # found_user = User.query.filter_by(
-        #     name=session[username_key]).first()
-        # if found_user:
-        #     session[email_key] = found_user.email
-        # else:
-        #     user = User(session[username_key], None)
-        #     db.session.add(user)
-        #     db.session.commit()
+        found_user = User.query.filter_by(
+            name=request.form[username_key]).first()
+        if found_user:
+            session[email_key] = found_user.email
+        else:
+            user = User(session[username_key], None)
+            db.session.add(user)
+            db.session.commit()
 
         return redirect(url_for('main.home'))
     else:

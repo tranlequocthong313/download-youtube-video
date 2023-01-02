@@ -1,10 +1,8 @@
 from googleapiclient.discovery import build
-from dotenv import load_dotenv
 from helper.dump_data import DUMP_DATA
 import os
 
-load_dotenv()
-SECRET_KEY = os.getenv("YOUTUBE_API_KEY")
+SECRET_KEY = os.environ.get("YOUTUBE_API_KEY")
 
 
 class YoutubeAPI:

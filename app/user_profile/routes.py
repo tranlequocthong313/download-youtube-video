@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, flash, url_for, B
 from models.user import User
 from extensions import db
 
-blueprint = Blueprint('profile', __name__)
+blueprint = Blueprint('user_profile', __name__)
 
 username_key = 'username'
 email_key = 'email'
@@ -21,11 +21,15 @@ def profile():
 
 @blueprint.route('/update-information', methods=['POST'])
 def update_information():
-    email = request.form['email']
-    session['email'] = email
-    # found_user = User.query.filter_by(
-    #     name=session[username_key]).first()
-    # found_user.email = email
-    # db.session.commit()
-    flash('Email has been updated!')
-    return redirect(url_for('profile.profile'))
+    try:
+        email = request.form['email']
+        session['email'] = email
+        found_user = User.query.filter_by(
+            name=session[username_key]).first()
+        found_user.email = email
+        db.session.commit()
+        flash('Email has been updated!')
+    except:
+        flash('Email has already been used!')
+    finally:
+        return redirect(url_for('user_profile.profile'))

@@ -1,0 +1,6 @@
+<h3>Total Users: {{users|length}}</h3>
+<ul>
+    {% for user in users %}
+    <li>ID: {{user.id}} Name: {{user.name}} Email: {{user.email}}</li>
+    {% endfor %}
+</ul>

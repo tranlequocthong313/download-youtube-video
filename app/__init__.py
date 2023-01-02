@@ -2,8 +2,9 @@ from flask import Flask
 from config import Config
 from extensions import db
 from main.routes import blueprint as main_blueprint
-from profile.routes import blueprint as profile_blueprint
+from user_profile.routes import blueprint as profile_blueprint
 from auth.routes import blueprint as auth_blueprint
+from helper.routes import blueprint as helper_blueprint
 
 
 def create_app(config_class=Config):
@@ -11,16 +12,18 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     # Initialize Flask extensions
-    db.init_app(app)
+    with app.app_context():
+        db.init_app(app)
+        db.create_all()
 
     # Register blueprints
     app.register_blueprint(main_blueprint)
     app.register_blueprint(profile_blueprint)
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(helper_blueprint)
 
     return app
 
 
 if __name__ == '__main__':
     create_app().run(debug=True)
-    db.create_all()
