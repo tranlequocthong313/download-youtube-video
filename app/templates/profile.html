@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p>{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="/update-information" method="post">
+    <input type="email" value="{{email if email}}" name="email" placeholder="Email">
+    <button type="submit">Update</button>
+</form>
+{% endblock %} -->
