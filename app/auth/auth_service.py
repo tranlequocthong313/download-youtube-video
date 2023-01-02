@@ -2,7 +2,7 @@ from flask import session, request, redirect, url_for
 from models.user import User
 from extensions import db
 from config import username_session_key, email_session_key
-from user_profile.user_service import UserService
+from user.user_service import UserService
 
 
 class AuthService:

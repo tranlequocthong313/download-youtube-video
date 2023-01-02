@@ -1,9 +1,9 @@
 from flask import session, render_template, request, redirect, flash, url_for, Blueprint
 from auth.auth_service import AuthService
-from user_profile.user_service import UserService
+from user.user_service import UserService
 from config import email_session_key
 
-blueprint = Blueprint('user_profile', __name__)
+blueprint = Blueprint('user', __name__)
 auth = AuthService()
 user = UserService()
 

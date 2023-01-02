@@ -2,7 +2,7 @@ from flask import Flask
 from config import Config
 from extensions import db
 from main.routes import blueprint as main_blueprint
-from user_profile.routes import blueprint as profile_blueprint
+from user.routes import blueprint as user_blueprint
 from auth.routes import blueprint as auth_blueprint
 from helper.routes import blueprint as helper_blueprint
 
@@ -18,7 +18,7 @@ def create_app(config_class=Config):
 
     # Register blueprints
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(profile_blueprint)
+    app.register_blueprint(user_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(helper_blueprint)
 
