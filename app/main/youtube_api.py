@@ -19,7 +19,6 @@ class YoutubeAPI:
                      developerKey=SECRET_KEY)
 
     def __execute(self, request):
-        response = None
         try:
             response = request.execute()
         except Exception:

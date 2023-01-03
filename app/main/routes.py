@@ -16,7 +16,6 @@ user = UserService()
 @blueprint.route('/')
 @blueprint.route('/home')
 def home():
-    username = None
     if auth.is_login():
         username = session[username_session_key]
     return render_template('index.html', username=username)
