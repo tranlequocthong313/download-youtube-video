@@ -1,6 +1,4 @@
 from flask import session, request, redirect, url_for
-from models.user import User
-from extensions import db
 from config import username_session_key, email_session_key
 from user.user_service import UserService
 
@@ -17,8 +15,6 @@ class AuthService:
             session[email_session_key] = found_user.email
         else:
             self.__user.add_new_user()
-
-        return redirect(url_for('main.home'))
 
     def set_new_session(self):
         session.permanent = True

@@ -1,5 +1,5 @@
 from flask import session, render_template, request, redirect, flash, url_for, Blueprint, jsonify
-from models.user import User
+from models.user import UserModel
 from extensions import db
 
 blueprint = Blueprint('helper', __name__)
@@ -13,4 +13,4 @@ def drop():
 
 @blueprint.route('/get_users', methods=['GET'])
 def get_users():
-    return render_template('users.html', users=User.query.all())
+    return render_template('users.html', users=UserModel.query.all())

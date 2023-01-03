@@ -9,9 +9,8 @@ auth = AuthService()
 @blueprint.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        return auth.login()
-    else:
-        return redirect_by_login_status()
+        auth.login()
+    return redirect_by_login_status()
 
 
 def redirect_by_login_status():

@@ -1,7 +1,7 @@
 from extensions import db
 
 
-class Video(db.Model):
+class VideoModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     videoId = db.Column(db.String(20))
     quality = db.Column(db.String(20))
