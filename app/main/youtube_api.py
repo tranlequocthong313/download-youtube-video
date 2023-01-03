@@ -19,12 +19,11 @@ class YoutubeAPI:
                      developerKey=SECRET_KEY)
 
     def __execute(self, request):
-        # try:
-        #     response = request.execute()
-        # except Exception:
-        #     # Rendering dump data because youtube limited its api request every day
-        #     response = DUMP_DATA
-        response = DUMP_DATA
+        try:
+            response = request.execute()
+        except Exception:
+            # Rendering dump data because youtube limited its api request every day
+            response = DUMP_DATA
         return response['items']
 
     def search_with_videoId(self, videoId):
