@@ -9,8 +9,7 @@ class AuthService:
     def login(self):
         self.set_new_session()
 
-        found_user = self.__user.find_user_by_name(
-            request.form[username_session_key])
+        found_user = self.__user.find_user_by_name(request.form[username_session_key])
         if found_user:
             session[email_session_key] = found_user.email
         else:
